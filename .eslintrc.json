@@ -1,3 +1,20 @@
-{
-  "extends": "next/core-web-vitals"
+{ 
+  "extends": "next/core-web-vitals",
+  "plugins": ["import", "import-helpers"],
+  "rules": {
+    "import-helpers/order-imports": [
+      "warn",
+      {
+        "newlinesBetween": "always",
+        "groups": ["module", "/^@\\//", ["parent", "sibling", "index"]],
+        "alphabetize": { "order": "asc", "ignoreCase": true }
+      }
+    ]
+  }
+  "settings": {
+  "import/extensions": [
+    ".js",
+    ".tsx"
+  ]
+}
 }
