@@ -10,7 +10,7 @@
         "alphabetize": { "order": "asc", "ignoreCase": true }
       }
     ]
-  }
+  },
   "settings": {
   "import/extensions": [
     ".js",
