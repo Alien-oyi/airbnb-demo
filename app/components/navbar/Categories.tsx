@@ -105,9 +105,9 @@ const Categories = () => {
         items-center
         justify-between
         overflow-x-auto">
-            {categories.map((item, index) => (
+            {categories.map((item) => (
                 <CategoryBox
-                key={item.index}
+                key={item.label}
                 label={item.label}
                 selected={category === item.label}
                 icon={item.icon} />

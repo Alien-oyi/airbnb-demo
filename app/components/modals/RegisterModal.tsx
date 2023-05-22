@@ -9,7 +9,7 @@ import {
     SubmitHandler,
     useForm
 } from 'react-hook-form'
-
+import useLoginModal from '@/app/hooks/useLoginModal';
 import useRegisterModal from '@/app/hooks/useRegisterModal';
 import Modal from './Modal';
 import Heading from '../Heading';
@@ -18,7 +18,9 @@ import Button from '../Button';
 import { toast } from 'react-hot-toast';
 import { signIn } from 'next-auth/react';
 
+
 const RegisterModal = () => {
+  const loginModal = useLoginModal();
   const registerModal = useRegisterModal();
   const [isLoading, setLoading] = useState(false);
 
@@ -47,6 +49,12 @@ const RegisterModal = () => {
         setLoading(false);
     })
   }
+
+  const onToggle = useCallback(() => {
+    registerModal.onClose();
+    loginModal.onOpen();
+  },[loginModal, registerModal])
+
   const bodyContent = (
     <div className='flex flex-col gap-4'>
         <Heading 
@@ -106,7 +114,7 @@ const RegisterModal = () => {
           Already have an account?
         </div>
         <div
-        onClick={registerModal.onClose} 
+        onClick={onToggle} 
         className='
         text-neutral-800
         cursor-pointer
