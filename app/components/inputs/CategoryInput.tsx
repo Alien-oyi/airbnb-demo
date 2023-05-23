@@ -16,7 +16,9 @@ const CategoryInput:React.FC<CategoryInputProps> = ({
     onClick
 }) => {
   return (
-    <div className={`
+    <div
+    onClick={() => onClick(label)} 
+    className={`
     rounded-xl
     border-2
     p-4
