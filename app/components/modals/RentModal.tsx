@@ -92,7 +92,7 @@ const RentModal = () => {
         router.refresh();
         reset();
         setStep(STEPS.CATEGORY)
-        rentModal.close();
+        rentModal.onClose();
       })
       .catch(()=> {
         toast.error('Something went wrong')
@@ -184,8 +184,9 @@ const RentModal = () => {
           <Heading 
           title="Add a photo of your place"
           subtitle="Show guests what your place looks like"/>
-          <ImageUpload value={imageSrc}
-          onChange={(value) => setCustomValue('imageSrc',value)}/>
+          <ImageUpload 
+          onChange={(value) => setCustomValue('imageSrc',value)}
+          value={imageSrc}/>
         </div>
       )
     }
@@ -196,18 +197,18 @@ const RentModal = () => {
           title="How would you describe your place?"
           subtitle="Short and sweet works best"/>
           <Input id="title"
-          lable ="Title"
+          label="Title"
           disabled={isloading}
           register={register}
           errors={errors}
-          required/>
+          required />
           <hr />
           <Input id="description"
-          lable ="Description"
+          label ="Description"
           disabled={isloading}
           register={register}
           errors={errors}
-          required/>
+          required />
 
         </div>
       )
