@@ -6,7 +6,7 @@ import { useMemo,useState } from "react";
 import Heading from "../Heading";
 import { categories } from "../navbar/Categories";
 import CategoryInput from "../inputs/CategoryInput";
-import { FieldValue, SubmitHandler, useForm } from "react-hook-form";
+import { FieldValues, SubmitHandler, useForm } from "react-hook-form";
 import CountrySelect from "../inputs/CountrySelect";
 import dynamic from "next/dynamic";
 import Counter from "../inputs/Counter";
@@ -38,7 +38,7 @@ const RentModal = () => {
             watch,
             formState: { errors },
             reset
-    } = useForm<FieldValue>({
+    } = useForm<FieldValues>({
       defaultValues: {
         category: "",
         location: null,
