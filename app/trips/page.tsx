@@ -1,40 +1,47 @@
-import EmptyState from "../components/EmptyState";
-import ClientOnly from "../components/ClientOnly";
-import getCurrentUser from "../actions/getCurrentUser";
-import getReservations from "../actions/getReservations";
+
+import EmptyState from "@/app/components/EmptyState";
+import ClientOnly from "@/app/components/ClientOnly";
+
+import getCurrentUser from "@/app/actions/getCurrentUser";
+import getReservations from "@/app/actions/getReservations";
+
 import TripsClient from "./TripsClient";
 
 const TripsPage = async () => {
-    const currentUser = await getCurrentUser();
+  const currentUser = await getCurrentUser();
 
-    if (!currentUser) {
-        return (
-            <Clientonly>
-                <EmptyState 
-                title="Unauthorized"
-                subtitle="Please login"/>
-            </Clientonly>
-        )
-    }
-    const reservations = await getReservations({userId: currentUser.id});
-
-    if (reservations.length===0) {
-        return (
-            <ClientOnly>
-                <EmptyState 
-                title="No reservations"
-                subtitle="You have not made any reservations yet."/>
-            </ClientOnly>
-        )
-    }
+  if (!currentUser) {
     return (
-        <ClientOnly>
-            <TripsClient 
-            reservations= {reservations}
-            currentUser={currentUser}
-            />
-        </ClientOnly>
-    )
-}
+      <ClientOnly>
+        <EmptyState
+          title="Unauthorized"
+          subtitle="Please login"
+        />
+      </ClientOnly>
+    );
+  }
 
+  const reservations = await getReservations({ userId: currentUser.id });
+
+  if (reservations.length === 0) {
+    return (
+      <ClientOnly>
+        <EmptyState
+          title="No trips found"
+          subtitle="Looks like you havent reserved any trips."
+        />
+      </ClientOnly>
+    );
+  }
+
+  return (
+    <ClientOnly>
+      <TripsClient
+        reservations={reservations}
+        currentUser={currentUser}
+      />
+    </ClientOnly>
+  );
+}
+ 
 export default TripsPage;

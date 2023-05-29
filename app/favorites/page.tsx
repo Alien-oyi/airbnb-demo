@@ -3,6 +3,7 @@ import ClientOnly from "../components/ClientOnly";
 
 import getCurrentUser from "../actions/getCurrentUser";
 import getFavoriteListing from "../actions/getFavoriteListing";
+import FavoritesClient from "./FavoritesClient";
 
 const ListingPage = async () => {
     const listings= await getFavoriteListing();
