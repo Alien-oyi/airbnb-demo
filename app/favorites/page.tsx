@@ -1,4 +1,3 @@
-'use client';
 
 import EmptyState from "@/app/components/EmptyState";
 import ClientOnly from "@/app/components/ClientOnly";
