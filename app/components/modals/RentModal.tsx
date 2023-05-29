@@ -81,7 +81,7 @@ const RentModal = () => {
     const onNext = () => {
         setStep((value) => value +1)
     }
-    const onSubmit: SubmitHandler<FieldValue> = (data) => {
+    const onSubmit: SubmitHandler<FieldValues> = (data) => {
       if (step !== STEPS.PRICE) {
         return  onNext()
       }
