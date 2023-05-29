@@ -221,7 +221,7 @@ const RentModal = () => {
           subtitle="How much do you charge per night?"/>
           <Input 
           id="price"
-          lable ="Price"
+          label="Price"
           formatPrice
           type="number"
           disabled={isloading}
