@@ -1,6 +1,6 @@
 import axios from "axios";
 import { useRouter } from "next/navigation";
-import { useCallback, useState } from "react";
+import { useCallback, useMemo } from "react";
 import { toast } from "react-hot-toast";
 
 import { SafeUser } from "@/app/types";
@@ -14,34 +14,41 @@ interface IUseFavorite {
 
 const useFavorite = ({ listingId, currentUser }: IUseFavorite) => {
   const router = useRouter();
+
   const loginModal = useLoginModal();
 
-  const [hasFavorited, setHasFavorited] = useState(false); // Moved the state to the outer scope
+  const hasFavorited = useMemo(() => {
+    const list = currentUser?.favoriteIds || [];
 
-  const toggleFavorite = useCallback(async (e: React.MouseEvent<HTMLDivElement>) => {
-    e.stopPropagation();
+    return list.includes(listingId);
+  }, [currentUser, listingId]);
 
-    if (!currentUser) {
-      return loginModal.onOpen();
-    }
+  const toggleFavorite = useCallback(
+    async (e: React.MouseEvent<HTMLDivElement>) => {
+      e.stopPropagation();
 
-    try {
-      let request;
-
-      if (hasFavorited) {
-        request = () => axios.delete(`/api/favorites/${listingId}`);
-      } else {
-        request = () => axios.post(`/api/favorites/${listingId}`);
+      if (!currentUser) {
+        return loginModal.onOpen();
       }
 
-      await request();
-      setHasFavorited(!hasFavorited); // Update the state after the API request
-      router.refresh();
-      toast.success('Success');
-    } catch (error) {
-      toast.error('Something went wrong.');
-    }
-  }, [currentUser, hasFavorited, listingId, loginModal, router]);
+      try {
+        let request;
+
+        if (hasFavorited) {
+          request = () => axios.delete(`/api/favorites/${listingId}`);
+        } else {
+          request = () => axios.post(`/api/favorites/${listingId}`);
+        }
+
+        await request();
+        router.refresh();
+        toast.success("Success");
+      } catch (error) {
+        toast.error("Something went wrong.");
+      }
+    },
+    [currentUser, hasFavorited, listingId, loginModal, router]
+  );
 
   return {
     hasFavorited,
