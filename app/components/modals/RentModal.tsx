@@ -88,6 +88,7 @@ const RentModal = () => {
       setIsLoading(true)
       axios.post('/api/listings', data)
       .then(() => {
+        console.log(data)
         toast.success('Listing created successfully')
         router.refresh();
         reset();
@@ -95,7 +96,7 @@ const RentModal = () => {
         rentModal.onClose();
       })
       .catch(()=> {
-        toast.error('Something went wrong')
+        toast.error('Post failed')
       })
       .finally(() => {
         setIsLoading(false)

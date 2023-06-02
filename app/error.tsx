@@ -13,6 +13,6 @@ const ErrorState: React.FC<ErrorStateProps> = ({ error }) => {
     },[error])
     return (
         <EmptyState 
-        title='Uh-no something went worng'/>
+        title='Uh-no something went wrong'/>
     )
 } 
